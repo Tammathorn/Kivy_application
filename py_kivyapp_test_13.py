@@ -17,21 +17,21 @@ class WelcomeScreen(GridLayout):
         super(WelcomeScreen, self).__init__(**kwargs)
         self.cols = 1
         self.add_widget(Label(text="WELCOME TO GAME!", font_size=36))
-        self.add_widget(Image(source='D:\Downloads Files\Memory Game\pngtree-welcome-wide-banner-style-png-image_6684044.png',
+        self.add_widget(Image(source='D:\Downloads Files\Game\pngtree-welcome-wide-banner-style-png-image_6684044.png',
                                 size_hint=(None, None), size=(1600, 1000)))  # Replace with your image
         self.add_widget(Button(text="CLICK TO START", on_press=self.start_game, font_size=24))
 
     def start_game(self, instance):
-        game = MemoryGame()
+        game = MatchingGame()
         self.parent.add_widget(game)
         self.parent.remove_widget(self)
 
 
 
 
-class MemoryGame(GridLayout):
+class MatchingGame(GridLayout):
     def __init__(self, **kwargs):
-        super(MemoryGame, self).__init__(**kwargs)
+        super(MatchingGame, self).__init__(**kwargs)
         self.cols = 4
         self.spacing = [10]
         self.padding = [30]
@@ -43,7 +43,7 @@ class MemoryGame(GridLayout):
         self.add_sound_switch()
         self.match_found = False
         self.score = 0
-        self.add_widget(Label(text="Score: 0", font_size=20, color=get_color_from_hex("#9AE1C9"), background_color2=get_color_from_hex("#eb3b5a")))
+        self.add_widget(Label(text="Score: 0", font_size=20, color=get_color_from_hex("#9AE1C9")))
         restart_button = Button(text="Restart", on_press=self.restart_game, font_size=20, background_color=get_color_from_hex("#eb3b5a"))
         self.add_widget(restart_button)
 
@@ -91,7 +91,7 @@ class MemoryGame(GridLayout):
         content.bind(on_press=popup.dismiss)
         popup.open()
         self.selected_cards = []  # Clear selected cards after popup is closed
-        img = Image(source='your_image_path.png')  # แทนที่ 'your_image_path.png' ด้วยที่เก็บภาพของคุณ
+        img = Image(source='your_image_path.png')  # 
         popup.content.add_widget(img)
         img.bind(on_press=self.image_click)
 
@@ -113,10 +113,13 @@ class MemoryGame(GridLayout):
     def restart_game(self, instance=None):
         self.cards = list(range(1, 9)) * 2
         random.shuffle(self.cards)
-        for child in self.children[2:]:  # Exclude the sound switch, score label, and restart button
-            child.text = ' '  # Clear card text
         self.score = 0  # Reset the score
         self.update_score(0)  # Update the score label
+        self.clear_widgets()  # Clear the current widgets in the layout
+        self.create_board()   # Recreate the game board
+
+
+
 
     def hide_unmatched_cards(self):
         for card in self.selected_cards:
@@ -133,10 +136,10 @@ class MemoryGame(GridLayout):
         self.score += points
         self.children[0].text = f"Score: {self.score}"
 
-class MemoryGameApp(App):
+class MatchingGameApp(App):
     def build(self):
         welcome_screen = WelcomeScreen()
         return welcome_screen
 
 if __name__ == '__main__':
-    MemoryGameApp().run()
+    MatchingGameApp().run()
