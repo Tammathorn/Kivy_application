@@ -29,7 +29,7 @@ class MemoryGame(GridLayout):
             self.add_widget(card_button)
 
     def add_sound_switch(self):
-        sound_switch = Switch(active=self.sound_enabled, on_active=self.toggle_sound)
+        sound_switch = Switch(active=self.sound_enabled, on_active=self.toggle_sound )
         self.add_widget(sound_switch)
 
     def card_click(self, button):

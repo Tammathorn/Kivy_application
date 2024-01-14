@@ -4,6 +4,8 @@ from kivy.uix.button import Button
 from kivy.uix.switch import Switch
 from kivy.uix.popup import Popup
 from kivy.core.audio import SoundLoader
+from kivy.uix.image import Image
+
 import random
 
 class MemoryGame(GridLayout):
@@ -14,6 +16,7 @@ class MemoryGame(GridLayout):
         random.shuffle(self.cards)
         self.selected_cards = []
         self.sound_enabled = True
+        self.sound_disable = False
         self.sound = SoundLoader.load('D:\\Downloads Files\\NewJeans - OMG [320] Kbps-(PagalWorld.Gay).mp3') 
         self.create_board()
         self.add_sound_switch()
@@ -25,8 +28,9 @@ class MemoryGame(GridLayout):
             self.add_widget(card_button)
 
     def add_sound_switch(self):
-        sound_switch = Switch(active=self.sound_enabled, on_active=self.toggle_sound)
+        sound_switch = Switch(active=self.sound_enabled, on_active=self.toggle_sound,inactive=self.sound_disable, off_inactive=self.untoggle_sound, )
         self.add_widget(sound_switch)
+    
 
     def card_click(self, button):
         if button.text != ' ':
@@ -48,6 +52,8 @@ class MemoryGame(GridLayout):
     def show_match_popup(self):
         if self.sound_enabled and self.sound:
             self.sound.play()
+        elif self.sound_disable and self.sound:
+            self.sound.stop()
 
         content = Button(text='Match!', size_hint=(None, None), size=(100, 50))
         popup = Popup(title='Match Found', content=content, auto_dismiss=True)
@@ -61,6 +67,8 @@ class MemoryGame(GridLayout):
     def toggle_sound(self, instance, value):
         self.sound_enabled = value
 
+    def untoggle_sound(self, instance, value):
+        self.sound_disable = value
 class MemoryGameApp(App):
     def build(self):
         return MemoryGame()

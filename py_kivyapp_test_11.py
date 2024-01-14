@@ -8,7 +8,6 @@ from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.image import AsyncImage
 from kivy.uix.image import Image
-from kivy.graphics import Color, Rectangle
 
 import random
 
@@ -35,14 +34,6 @@ class MemoryGame(GridLayout):
         for card_value in self.cards:
             card_button = Button(text=' ', on_press=self.card_click)
             card_button.card_value = card_value
-
-            # Set the background color of the card button to light blue
-            with card_button.canvas.before:
-                Color(0.7, 0.7, 1)  # Light blue color (adjust values as needed)
-                card_rect = Rectangle(pos=card_button.pos, size=card_button.size)
-            card_button.bind(pos=lambda instance, value: setattr(card_rect, 'pos', value),
-                            size=lambda instance, value: setattr(card_rect, 'size', value))
-
             self.add_widget(card_button)
 
     def add_sound_switch(self):

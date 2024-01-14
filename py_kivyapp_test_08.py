@@ -33,22 +33,11 @@ class MemoryGame(GridLayout):
         sound_switch.bind(active=self.toggle_sound)
         self.add_widget(sound_switch)
 
-    def add_change_sound_button(self):
-        change_sound_button = Button(text="Change Sound", on_press=self.show_file_chooser)
-        self.add_widget(change_sound_button)
-
     def show_file_chooser(self, instance):
         file_chooser = FileChooserIconView()
         file_chooser.bind(on_submit=self.change_sound)
         popup = Popup(title="Choose Sound File", content=file_chooser, size_hint=(0.9, 0.9))
         popup.open()
-
-    def change_sound(self, chooser, file_path, *args):
-        if self.sound:
-            self.sound.stop()
-        self.sound = SoundLoader.load(file_path[0])
-        if self.sound_enabled and self.sound:
-            self.sound.play()
 
     def card_click(self, button):
         if button.background_normal != 'path/to/your/images/back_image.png':

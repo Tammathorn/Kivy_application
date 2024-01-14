@@ -15,8 +15,8 @@ class MemoryGame(GridLayout):
         self.cards = list(range(1, 9)) * 2
         random.shuffle(self.cards)
         self.selected_cards = []
-        self.sound_enabled = True
-        self.sound = SoundLoader.load('D:\Downloads Files\vo-roi-tieng-maleevsking-sound-effect-th-www_tiengdong_com.mp3')  # Replace with your sound file path
+        self.sound_enabled = False
+        self.sound = SoundLoader.load('D:\\Downloads Files\\NewJeans - OMG [320] Kbps-(PagalWorld.Gay).mp3')  # Replace with your sound file path
         self.create_board()
         self.add_sound_switch()
 
@@ -49,13 +49,18 @@ class MemoryGame(GridLayout):
             self.hide_unmatched_cards()
 
     def show_match_popup(self):
-        if self.sound_enabled and self.sound:
-            self.sound.play()
+            if self.sound_enabled and self.sound:
+                if not self.sound.state == 'play':
+                    self.sound.play()
 
-        content = Button(text='Match!', size_hint=(None, None), size=(100, 50))
-        popup = Popup(title='Match Found', content=content, auto_dismiss=True)
-        content.bind(on_press=popup.dismiss)
-        popup.open()
+            content = Button(text='Match!', size_hint=(None, None), size=(100, 50))
+            popup = Popup(title='Match Found', content=content, auto_dismiss=True)
+            content.bind(on_press=popup.dismiss)
+            popup.open()
+            content = Button(text='Match!', size_hint=(None, None), size=(100, 50))
+            popup = Popup(title='Match Found', content=content, auto_dismiss=True)
+            content.bind(on_press=popup.dismiss)
+            popup.open()
 
     def hide_unmatched_cards(self):
         for card in self.selected_cards:
