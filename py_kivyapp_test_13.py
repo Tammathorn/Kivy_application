@@ -16,10 +16,10 @@ class WelcomeScreen(GridLayout):
     def __init__(self, **kwargs):
         super(WelcomeScreen, self).__init__(**kwargs)
         self.cols = 1
-        self.add_widget(Label(text="Welcome to Memory Game!", font_size=36))
+        self.add_widget(Label(text="WELCOME TO GAME!", font_size=36))
         self.add_widget(Image(source='D:\Downloads Files\Memory Game\pngtree-welcome-wide-banner-style-png-image_6684044.png',
                                 size_hint=(None, None), size=(1600, 1000)))  # Replace with your image
-        self.add_widget(Button(text="Start Game", on_press=self.start_game, font_size=24))
+        self.add_widget(Button(text="CLICK TO START", on_press=self.start_game, font_size=24))
 
     def start_game(self, instance):
         game = MemoryGame()
@@ -32,19 +32,20 @@ class WelcomeScreen(GridLayout):
 class MemoryGame(GridLayout):
     def __init__(self, **kwargs):
         super(MemoryGame, self).__init__(**kwargs)
-        self.cols = 4  # Increase columns to accommodate new widgets
+        self.cols = 4
+        self.spacing = [10]
+        self.padding = [30]
         self.cards = list(range(1, 9)) * 2
-        
         self.selected_cards = []
         self.sound_enabled = False
-        self.sound = SoundLoader.load('D:\\Downloads Files\\NewJeans - OMG [320] Kbps-(PagalWorld.Gay).mp3')  # Replace with your sound file path
+        self.sound = SoundLoader.load('D:\\Downloads Files\\NewJeans - OMG [320] Kbps-(PagalWorld.Gay).mp3')
         self.create_board()
         self.add_sound_switch()
-        self.match_found = False  # Flag to track if a match has been found
-        self.score = 0  # Initialize score
-        self.add_widget(Label(text="Score: 0", font_size=20))  # Score Label
-        self.add_widget(Button(text="Restart", on_press=self.restart_game, font_size=20))  # Restart Button
-
+        self.match_found = False
+        self.score = 0
+        self.add_widget(Label(text="Score: 0", font_size=20, color=get_color_from_hex("#dfe4ea")))
+        restart_button = Button(text="Restart", on_press=self.restart_game, font_size=20, background_color=get_color_from_hex("#eb3b5a"))
+        self.add_widget(restart_button)
     def random_shuffle(self):
         random.shuffle(self.cards)
 
