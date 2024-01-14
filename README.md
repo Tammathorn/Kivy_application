@@ -6,8 +6,9 @@ This is my kivy_application repository.
 * Contact : 6610110506@email.psu.ac.th
 
 Up date 15/1/2024 TH
+	
 
-  	
+   
 Game Overview:
 
 	 This is a matching game with pairs of cards hidden behind buttons.
