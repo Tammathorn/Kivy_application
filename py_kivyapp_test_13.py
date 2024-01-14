@@ -43,9 +43,10 @@ class MemoryGame(GridLayout):
         self.add_sound_switch()
         self.match_found = False
         self.score = 0
-        self.add_widget(Label(text="Score: 0", font_size=20, color=get_color_from_hex("#dfe4ea")))
+        self.add_widget(Label(text="Score: 0", font_size=20, color=get_color_from_hex("#9AE1C9"), background_color2=get_color_from_hex("#eb3b5a")))
         restart_button = Button(text="Restart", on_press=self.restart_game, font_size=20, background_color=get_color_from_hex("#eb3b5a"))
         self.add_widget(restart_button)
+
     def random_shuffle(self):
         random.shuffle(self.cards)
 
