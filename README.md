@@ -8,7 +8,7 @@ This is my kivy_application repository.
 Up date 15/1/2024 TH
 
   	
-	 	Game Overview:
+	Game Overview:
 
 This is a matching game with pairs of cards hidden behind buttons.
 Players try to match pairs by clicking on two cards in succession.
@@ -48,7 +48,7 @@ Use the sound switch to enable or disable sound effects.
 Click the "Restart" button to start a new game at any time.
 
 
-		Additional Notes:
+	Additional Notes:
 
 The game currently uses a fixed set of numbered cards.
 You can customize the card images and sounds by replacing the file paths in the code.
